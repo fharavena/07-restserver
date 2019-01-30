@@ -16,13 +16,14 @@ app.use(bodyParser.json());
 //habilitar la carpeta public
 app.use(express.static(path.resolve(__dirname, '../public')));
 
-
-
 //configuracion global de rutas
 app.use(require('./routes/index'));
 
 
-mongoose.connect(process.env.URLDB, (err, res) => {
+mongoose.connect(process.env.URLDB, {
+    useCreateIndex: true,
+    useNewUrlParser: true
+}, (err, res) => {
     if (err) throw err;
 
     console.log('Base de datos online!!');
